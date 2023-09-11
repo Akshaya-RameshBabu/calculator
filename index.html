@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<head><title> calculator</title>
+<link  rel="stylesheet"  href="style.css">
+</head>
+<body>
+       <div class="calc">
+	
+  	  <input   id="out" >
+        <div class="input_group">
+	<hr>
+	 <div class="buttondiv">
+	   <button class="btn" value="ac" onclick="clearall()">ac</button>
+	   <button class="btn" value="del" onclick="del()">del</button>
+	   <button class="btn" value="/100" onclick="cal('%')">%</button>
+	   <button class="btn" value="/" onclick="cal('/')">/</button>
+	 </div>
+	 <div class="buttondiv">
+ 	 <button class="btn" value="7" onclick="cal('7')">7</button>
+	 <button class="btn" value="8" onclick="cal('8')">8</button>
+	 <button class="btn" value="9" onclick="cal('9')">9</button>
+	 <button class="btn" value="*" onclick="cal('x')">x</button>
+	 </div>
+
+	 <div class="buttondiv">
+	 <button class="btn" value="4" onclick="cal('4')">4</button>
+	 <button class="btn" value="5" onclick="cal('5')">5</button>
+	 <button class="btn" value="6" onclick="cal('6')">6</button>
+	 <button class="btn" value="-" onclick="cal('-')">-</button>
+	 </div>
+	
+	 <div class="buttondiv">
+	 <button class="btn" value="1" onclick="cal('1')">1</button>
+	 <button class="btn" value="2" onclick="cal('2')">2</button>
+	 <button class="btn" value="3" onclick="cal('3')">3</button>
+	 <button class="btn" value="+" onclick="cal('+')">+</button>
+	 </div>
+	 <div class="buttondiv">
+	 <button class="btn" value="^" onclick="cal('^')">^</button>
+	 <button class="btn" value="0" onclick="cal('0')">0</button>
+	 <button class="btn" value="." onclick="cal('.')">.</button>
+	 <button class="btn" value="=" onclick="result()">=</button>
+	 </div>
+	 
+	</div>
+      </div>
+<script>
+let operators=["+","-","x","/","^","%"]
+let lv=0
+let flag=0
+function cal(v){
+	flag++;
+	let val=document.getElementById("out")
+	if(flag==1)
+	{
+	 val.value +=v
+	 let fv=val.value.slice(0,1)
+	   if(operators.includes(fv))
+	  {
+	   
+	   alert("operators cannot be first value")
+	   del()
+	   
+	  }
+
+	}
+        if(flag!=1)
+	{
+
+	let lv=val.value.slice(val.value.length-1)
+
+	  if(!(operators.includes(lv) && operators.includes(v)))
+	  {
+           val.value +=v
+	  }  
+	  else{
+	      alert("operators cannot be continuous")
+             } 
+        } 
+	
+	
+}
+function clearall(){
+       let clr=document.getElementById("out")
+	clr.value=""
+	flag=0
+}
+function del(){
+	let del=document.getElementById("out")
+	del.value=del.value.slice(0,-1)
+
+}
+function result()
+{	
+         let output=document.getElementById("out")
+	 let lv=output.value.slice(output.value.length-1)
+	
+	  let str=output.value
+	  str= str.replaceAll("x","*")
+	  str=str.replaceAll("^","**")
+
+	  console.log(str)
+	  if(operators.includes(lv))
+	  {
+	   alert("complete the expression") 
+	  }
+	  
+	 else{
+
+	  let fr=eval(str) 
+	  output.value=fr
+	  }	
+
+}
+
+</script>
+</body>
+</html>
+ 
